@@ -2,7 +2,7 @@
 
 /audio/*
 /img/*
-!/audio
-!/img/qrcode
+!/audio/
+!/img/qrcode/
 /img/qrcode/*.png
 !/img/welcome.jpg
