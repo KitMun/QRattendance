@@ -1,7 +1,8 @@
 # files to ignore globally
 
-/audio/
+/audio/*
 /img/*
+!/audio
 !/img/qrcode
 /img/qrcode/*.png
 !/img/welcome.jpg
