@@ -21,7 +21,7 @@ if(isset($_SESSION['name'])){
 
 // get guest list
 if(isset($_SESSION['name'])) {
-	// list with check in button for logged in users
+	// list with check in button for logged in users, order by guest ID
 	$sql = "SELECT guestID, name, DATE_FORMAT(arrivalTime,'%l:%i %p') AS arrivalTime FROM guest ORDER BY guestID";
 		
 	$statement = $con->prepare($sql);
@@ -37,11 +37,11 @@ if(isset($_SESSION['name'])) {
 					<td> '.$count++.' </td>
 					<td> '.$row['name'].' </td>
 					<td> '.$row['arrivalTime'].' </td>
-					<td> <button><a href="guestArrival.php?guestID='.$row['guestID'].'">抵达</a></button></td>
+					<td> <button><a href="guestArrival.php?guestID='.$row['guestID'].'">Check in</a></button></td>
 				</tr>';
 	}
 }else{
-	// list without check in button
+	// list without check in button, order by name
 	$sql = "SELECT name, DATE_FORMAT(arrivalTime,'%l:%i %p') AS arrivalTime FROM guest ORDER BY name";
 		
 	$statement = $con->prepare($sql);
@@ -66,7 +66,7 @@ if(isset($_SESSION['name'])) {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>嘉宾名单</title>
+	<title>Guest list</title>
 	<style>
 		table{
 			border:1px solid black;
@@ -93,28 +93,28 @@ if(isset($_SESSION['name'])) {
 			echo '
 				<form action="index.php" method="post">
 					<span id="userDetail">
-						'.$_SESSION['name'].', 屏幕号 : '.$_SESSION['channel'].'&nbsp;&nbsp;
-						<button type="submit" name="logout" value="1">退出</button>
+						'.$_SESSION['name'].', Screen no. : '.$_SESSION['channel'].'&nbsp;&nbsp;
+						<button type="submit" name="logout" value="1">Log out</button>
 					</span>
 				</form><br><br>
 			'; 
 		?>
-		<h1>嘉宾名单</h1>
+		<h1>Guest list</h1>
 		
 		<?php if(isset($kickout)){
-			echo '<h3>抱歉，你已经被踢出，请<a href="index.php">重新登录</a></h3>';
+			echo '<h3>Ops, you\'ve been kicked out, please <a href="index.php">relogin</a></h3>';
 			unset($kickout);
 		}?>
 		
-		<h3>已报到 : <span id="arrivedCount"><?php echo $arrivedCount; ?></span>
-		&nbsp;&nbsp;&nbsp;&nbsp;未报到 : <span id="notArrivedCount"><?php echo $notArrivedCount; ?></span></h3>
+		<h3>Arrived : <span id="arrivedCount"><?php echo $arrivedCount; ?></span>
+		&nbsp;&nbsp;&nbsp;&nbsp;Not arrived : <span id="notArrivedCount"><?php echo $notArrivedCount; ?></span></h3>
 		
 		<table id="guestList">
 			<tr>
 				<th>No. </th>
-				<th>姓名 </th>
-				<th>报到时间 </th>
-				<?php if(isset($_SESSION['name'])) echo '<th>选项 </th>'; ?>
+				<th>Name </th>
+				<th>Arrival time </th>
+				<?php if(isset($_SESSION['name'])) echo '<th>Option </th>'; ?>
 			</tr>
 			<?php 
 				echo $list;
@@ -122,7 +122,7 @@ if(isset($_SESSION['name'])) {
 		</table>
 		<br>
 		<br>
-		<button id="btnBack" type="button"><a href="index.php" style="text-decoration:none;color:black;">主页</a></button>
+		<button id="btnBack" type="button"><a href="index.php" style="text-decoration:none;color:black;">Menu</a></button>
 	</div>
 	
   </body>

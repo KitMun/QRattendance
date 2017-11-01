@@ -17,11 +17,11 @@ if(isset($_SESSION['name'])){
 		unset($_SESSION['userID']);
 		unset($_SESSION['name']);
 		unset($_SESSION['channel']);
-		echo '<h3>抱歉，你已经被踢出，请<a href="index.php">重新登录</a></h3>';
+		echo '<h3>You\'ve been kicked out, please <a href="index.php">log in</a> again</h3>';
 		die();
 	}
 }else{
-	echo '<h3>请先<a href="index.php">登录</a></h3>';
+	echo '<h3>Please <a href="index.php">log in</a></h3>';
 	die();
 }
 
@@ -31,7 +31,7 @@ if(isset($_SESSION['name'])){
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>添加嘉宾</title>
+	<title>Add guest</title>
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/addGuestForm.js"></script>
 	<style>
@@ -47,25 +47,25 @@ if(isset($_SESSION['name'])){
 			echo '
 				<form action="index.php" method="post">
 					<span id="userDetail">
-						'.$_SESSION['name'].', 屏幕号 : '.$_SESSION['channel'].'&nbsp;&nbsp;
-						<button type="submit" name="logout" value="1">退出</button>
+						'.$_SESSION['name'].', Screen no. : '.$_SESSION['channel'].'&nbsp;&nbsp;
+						<button type="submit" name="logout" value="1">Log out</button>
 					</span>
 				</form>
 			'; 
 		?>
 		<br><br><br>
-		<h1> 添加嘉宾 </h1>
+		<h1> Add Guest </h1>
 		<br>
 		<h3>
-			姓名 : 
+			Name : 
 			<input id="guestName" name="guestName" type="text" placeholder="Name" />
 		</h3>
 		<h3>
-			电邮 : 
+			Email : 
 			<input id="guestEmail" name="guestEmail" type="email" placeholder="Email" />
 		</h3>	
 		<br>
-		<button id="btnSave" type="button">添加</button>
-		<a id="btnBack" href="index.php" style="text-decoration:none;color:black;"><button type="button">主页</button></a>
+		<button id="btnSave" type="button">Add</button>
+		<a id="btnBack" href="index.php" style="text-decoration:none;color:black;"><button type="button">Menu</button></a>
   </body>
 </html>

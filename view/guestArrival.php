@@ -17,11 +17,11 @@ if(isset($_SESSION['name'])){
 		unset($_SESSION['userID']);
 		unset($_SESSION['name']);
 		unset($_SESSION['channel']);
-		echo '<h3>抱歉，你已经被踢出，请<a href="index.php">重新登录</a></h3>';
+		echo '<h3>You\'ve been kicked out, please <a href="index.php">log in</a> again</h3>';
 		die();
 	}
 }else{
-	echo '<h3>请先<a href="index.php">登录</a></h3>';
+	echo '<h3>Please <a href="index.php">log in</a></h3>';
 	die();
 }
 
@@ -63,7 +63,7 @@ $con->close();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>嘉宾抵达</title>
+	<title>Guest arrival</title>
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/guestArrival.js"></script>
 	<style>
@@ -82,33 +82,33 @@ $con->close();
 			echo '
 				<form action="index.php" method="post">
 					<span id="userDetail">
-						'.$_SESSION['name'].', 屏幕号 : '.$_SESSION['channel'].'&nbsp;&nbsp;
-						<button type="submit" name="logout" value="1">退出</button>
+						'.$_SESSION['name'].', Screen no. : '.$_SESSION['channel'].'&nbsp;&nbsp;
+						<button type="submit" name="logout" value="1">Log out</button>
 					</span>
 				</form>
 			'; 
 		?>
 		<br><br><br>
-		<h1> 嘉宾抵达 </h1>
+		<h1> Guest arrival </h1>
 		<br>
 		<form action="guestArrival.php?guestID=<?php echo $guestID;?>" method="POST">
 			<h3>
-				姓名 : 
+				Name : 
 				<span id="guestName" name="guestName"><?php echo $name;?></span>
 				<br><br>
-				电邮 : 
+				Email : 
 				<span id="guestEmail" name="guestEmail"><?php echo $email;?></span>
-				<input id="txtEmail" name="txtEmail" type="email" placeholder="<?php echo $name;?>的电邮" value="<?php echo $email;?>" required/>
-				<button type="button" id="editEmail" >更改</button>
-				<button type="submit" id="saveEmail" >储存</button>
+				<input id="txtEmail" name="txtEmail" type="email" placeholder="<?php echo $name;?>'s email" value="<?php echo $email;?>" required/>
+				<button type="button" id="editEmail" >Edit</button>
+				<button type="submit" id="saveEmail" >Save</button>
 				<br><br>
-				欢迎邮件 : <span id="guestEmailTime" name="guestEmailTime"><?php if(is_null($emailTime)) echo "未发送"; else echo $emailTime;?></span>
-				<button type="button" id="sendEmail" >发送</button>
+				Welcoming email : <span id="guestEmailTime" name="guestEmailTime"><?php if(is_null($emailTime)) echo "Not send yet"; else echo $emailTime;?></span>
+				<button type="button" id="sendEmail" >Send</button>
 			</h3>	
 		</form>
 		<br>
 		<input id="guestID" type="hidden" value="<?php echo $guestID;?>"/>
-		<button id="btnArrive" type="button">确认抵达</button>
-		<button id="btnBack" type="button"><a href="index.php" style="text-decoration:none;color:black;">主页</a></button>
+		<button id="btnArrive" type="button">Confirm arrival</button>
+		<button id="btnBack" type="button"><a href="index.php" style="text-decoration:none;color:black;">Menu</a></button>
   </body>
 </html>

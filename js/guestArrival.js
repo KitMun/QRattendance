@@ -14,7 +14,6 @@ $(function() {
 				guestID: $("#guestID").val()
 			}
 		}).done(function(json) {
-			// alert(json);
 			reply = jQuery.parseJSON(json);
 			alert(reply.msg);
 			if(reply.status == 0)
@@ -41,7 +40,7 @@ $(function() {
 	});
 	
 	$(document).on('click', '#sendEmail', function(e) {
-		if(confirm("确认发送邮件")){
+		if(confirm("Confirm to send?")){
 			sendWelcomeEmail();
 		}
 	});
@@ -55,7 +54,6 @@ function sendWelcomeEmail(){
 			guestID: $("#guestID").val()
 		}
 	}).done(function(json) {
-		// alert(json);
 		reply = jQuery.parseJSON(json);
 		alert(reply.msg);
 		location.reload();

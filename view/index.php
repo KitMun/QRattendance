@@ -43,7 +43,7 @@ if(isset($_SESSION['name'])){
 		$statement = $con->prepare($sql);
 		$statement->bind_param("i",$userID);
 		if (!$statement->execute()) {
-			$msg = "Fail to log out, please contact Koo";
+			$msg = "Fail to log out";
 		}else{
 			// destroy SESSION
 			unset($_SESSION['userID']);
@@ -61,7 +61,7 @@ if(isset($_SESSION['name'])){
 			$statement = $con->prepare($sql);
 			$statement->bind_param("ii",$channel,$userID);
 			if (!$statement->execute()) {
-				$msg = "Fail to change channel, please contact Koo";
+				$msg = "Fail to change channel";
 			}else{
 				// update SESSION
 				$_SESSION['channel'] = $channel;
@@ -77,7 +77,7 @@ if(isset($_SESSION['name'])){
 			$statement = $con->prepare($sql);
 			$statement->bind_param("i",$userID);
 			if (!$statement->execute()) {
-				$msg = "Fail to kick, please contact Koo";
+				$msg = "Fail to kick user";
 			}
 			$statement->close();
 		}
@@ -118,7 +118,7 @@ if(isset($_SESSION['name'])){
 							<td>'.$count.'</td>
 							<td>'.$row['name'].'</td>
 							<td>'.$row['channel'].'</td>
-							<td> <button type="submit" name="kickOut" value="'.$row['userID'].'">踢出</button></td>
+							<td> <button type="submit" name="kickOut" value="'.$row['userID'].'">Kick</button></td>
 						</tr>';
 		}
 		$statement->close();
@@ -130,7 +130,7 @@ if(isset($_SESSION['name'])){
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>方耀祥与薛仙明 - 佛化婚礼</title>
+	<title>QR Attendance System</title>
 	<script src="../js/jquery.min.js"></script>
 	<style>
 		#userDetail{
@@ -154,18 +154,18 @@ if(isset($_SESSION['name'])){
 				echo '
 					<form action="index.php" method="post">
 						<span id="userDetail">
-							'.$_SESSION['name'].', 屏幕号 : '.$_SESSION['channel'].'&nbsp;&nbsp;
-							<button type="submit" name="logout" value="1">退出</button>
+							'.$_SESSION['name'].', Screen no. : '.$_SESSION['channel'].'&nbsp;&nbsp;
+							<button type="submit" name="logout" value="1">Log out</button>
 						</span>
 					</form>
 				'; 
 				
 		?>
 		<br><br><br>
-		<h1> 方耀祥与薛仙明 - 佛化婚礼 </h1><br>
+		<h1> QR Attendance System </h1><br>
 		<?php
 		if(isset($kickout)) {
-			echo '<h3>抱歉，你已经被踢出，请重新登入</h3>'; 
+			echo '<h3>Ops, you\'ve been kicked out, please relogin</h3>'; 
 			unset($kickout);
 		}
 		if(!isset($_SESSION['name'])){
@@ -173,33 +173,33 @@ if(isset($_SESSION['name'])){
 			<form action="index.php" method="post">
 				<input id="name" name="name" type="text" length="5" placeholder="Name" required/>
 				<input id="pw" name="pw" type="password" placeholder="Password" required/>
-				<br><br><button type="submit">登录</button>
+				<br><br><button type="submit">Log in</button>
 			</form><br><br>
-			<button id="btnViewGuest" type="button"><a href="viewGuest.php" style="text-decoration:none;color:black;">嘉宾名单</a></button>
+			<button id="btnViewGuest" type="button"><a href="viewGuest.php" style="text-decoration:none;color:black;">Guest list</a></button>
 			<br><br>
-			<h3>欢迎屏幕</h3>
-			<button><a href="welcomeMessage.php?screen=1" style="text-decoration:none;color:black;">屏幕 1</a></button>
-			<button><a href="welcomeMessage.php?screen=2" style="text-decoration:none;color:black;">屏幕 2</a></button>
-			<button><a href="welcomeMessage.php?screen=3" style="text-decoration:none;color:black;">屏幕 3</a></button>
+			<h3>Welcoming screen</h3>
+			<button><a href="welcomeMessage.php?screen=1" style="text-decoration:none;color:black;">Screen 1</a></button>
+			<button><a href="welcomeMessage.php?screen=2" style="text-decoration:none;color:black;">Screen 2</a></button>
+			<button><a href="welcomeMessage.php?screen=3" style="text-decoration:none;color:black;">Screen 3</a></button>
 			<?php
 		}else{
 			?>
-			<button id="btnViewGuest" type="button"><a href="viewGuest.php" style="text-decoration:none;color:black;">嘉宾名单</a></button>
-			<h3>切换我的屏幕号</h3>
+			<button id="btnViewGuest" type="button"><a href="viewGuest.php" style="text-decoration:none;color:black;">Guest list</a></button>
+			<h3>Change my screen no.</h3>
 			<form action="index.php" method="post">
-				<button type="submit" name="channel" value="1">屏幕 1 (<?php echo $ch1; ?>)</button>
-				<button type="submit" name="channel" value="2">屏幕 2 (<?php echo $ch2; ?>)</button>
-				<button type="submit" name="channel" value="3">屏幕 3 (<?php echo $ch3; ?>)</button>
+				<button type="submit" name="channel" value="1">Screen 1 (<?php echo $ch1; ?>)</button>
+				<button type="submit" name="channel" value="2">Screen 2 (<?php echo $ch2; ?>)</button>
+				<button type="submit" name="channel" value="3">Screen 3 (<?php echo $ch3; ?>)</button>
 			</form><br><br>
-			<button id="btnAddGuest" type="button"><a href="addGuestForm.php" style="text-decoration:none;color:black;">添加嘉宾</a></button>
-			<h3>用户名单</h3>
+			<button id="btnAddGuest" type="button"><a href="addGuestForm.php" style="text-decoration:none;color:black;">Add guest</a></button>
+			<h3>User list</h3>
 			<form action="index.php" method="post">
 				<table id="tblUserList">
 					<tr>
 						<th> No. </th> 
-						<th> 名字 </th> 
-						<th> 屏幕号 </th> 
-						<th> 选项 </th> 
+						<th> Name </th> 
+						<th> Screen </th> 
+						<th> Option </th> 
 					</tr>
 					<?php echo $userList; ?>
 				</table>
