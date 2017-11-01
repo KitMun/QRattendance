@@ -5,7 +5,7 @@
 	$stickerAbsolutePath = "../img/welcome.png";
 	
 	$ajaxReply['status'] = 0;
-	$ajaxReply['msg'] = "邮件已发送";
+	$ajaxReply['msg'] = "Message for success";
 	
 	//get related variables
 	$guestID = $_POST['guestID'];
@@ -41,28 +41,25 @@
 		//Server settings
 		$mail->SMTPDebug = 2;                                 // Enable verbose debug output
 		$mail->isSMTP();                                      // Set mailer to use SMTP
-		$mail->Host = 'smtp.live.com';  					// Specify main and backup SMTP servers
+		$mail->Host = 'smtp.server';  					// Specify main and backup SMTP servers
 		$mail->SMTPAuth = true;                               // Enable SMTP authentication
-		$mail->Username = 'impianaadev@hotmail.com';                 // SMTP username
-		$mail->Password = 'ImpianAA';                           // SMTP password
+		$mail->Username = 'email';                 // SMTP username
+		$mail->Password = 'password';                           // SMTP password
 		$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 		$mail->Port = 587;                                    // TCP port to connect to
 
 		//Recipients
-		$mail->setFrom('impianaadev@hotmail.com', 'Demo');
+		$mail->setFrom('email', 'Demo');
 		$mail->addAddress($email, $name);     // Add a recipient
-
-		//Attachments
-		$mail->AddEmbeddedImage('../img/Little Sami-0'.mt_rand(1,6).'.png', 'cute');
 
 		//Content
 		$mail->isHTML(true);                                  // Set email format to HTML
-		$mail->Subject = '欢迎你莅临方耀祥与薛仙明的佛化婚礼';
-		$mail->Body    = '吉祥，<br><br>欢迎您大驾光临! <br> 谨送上一个可爱图案表示感谢<br> 请好好享受食物<br><img src="cid:cute" style="max-width:100%" />';
+		$mail->Subject = 'Subject';
+		$mail->Body    = 'Content';
 		$mail->CharSet="UTF-8";
 		$mail->send();
 		
-		// update send email time
+		// update send email time follow timezone
 		$sql = "UPDATE guest SET emailTime = NOW() + INTERVAL 8 HOUR WHERE guestID = ?";
 		$statement = $con->prepare($sql);
 		$statement->bind_param("i", $guestID);

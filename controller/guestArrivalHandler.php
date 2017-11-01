@@ -14,7 +14,7 @@
 	ob_start(); //to clean any output and encode json at the end
 	// add guest into DB to get guestID
 	$ajaxReply['status'] = 0;
-	$ajaxReply['msg'] = "已更新";
+	$ajaxReply['msg'] = "Message for success";
 	
 	//get related variables
 	$guestID = $_POST['guestID'];

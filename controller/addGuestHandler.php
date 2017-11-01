@@ -1,8 +1,8 @@
 <?php 
 	ob_start(); //to clean any output and encode json at the end
 	//SETTINGS
-	// $domain = "http://impianaadev.ddns.net";
-	$domain = "impian-aa-dev.000webhostapp.com";
+	// web domain specify in QR code generated and send to guest
+	$domain = "192.168.0.2";
 
 	// add guest into DB to get guestID
 	$ajaxReply['status'] = 0;
@@ -75,7 +75,6 @@
      
     $qrCodeDir = "../img/qrcode/"; 
 	
-    //$domain = "impianaadev.ddns.net";
 	$url = $domain."/view/guestArrival.php?guestID=".$newGuestID;
      
     $fileName = 'guest'.$newGuestID.'.png'; 
@@ -100,15 +99,15 @@
 		//Server settings
 		$mail->SMTPDebug = 2;                                 // Enable verbose debug output
 		$mail->isSMTP();                                      // Set mailer to use SMTP
-		$mail->Host = 'smtp.live.com';  					// Specify main and backup SMTP servers
+		$mail->Host = 'SMTP.SERVER';  					// Specify main and backup SMTP servers
 		$mail->SMTPAuth = true;                               // Enable SMTP authentication
-		$mail->Username = 'impianaadev@hotmail.com';                 // SMTP username
-		$mail->Password = 'ImpianAA';                           // SMTP password
+		$mail->Username = 'email@email.com';                 // SMTP username
+		$mail->Password = 'password';                           // SMTP password
 		$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 		$mail->Port = 587;                                    // TCP port to connect to
 
 		//Recipients
-		$mail->setFrom('impianaadev@hotmail.com', 'Demo');
+		$mail->setFrom('email@email.com', 'Demo');
 		$mail->addAddress($email, $name);     // Add a recipient
 
 		//Attachments
@@ -116,18 +115,8 @@
 
 		//Content
 		$mail->isHTML(true);                                  // Set email format to HTML
-		$mail->Subject = '佛化婚礼嘉宾邀请函 - 方耀祥与薛仙明';
-		$mail->Body    = '吉祥，<br><br> 
-						感谢您抽空共襄盛举。<br><br>
-						佛化婚礼详情:-<br>
-						日期：10月21日(六)<br>
-						时间：上午10时<br>
-						地点：马六甲诺富特酒店十九楼<br>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Novotel Melaka, 19th Floor<br>
-						地址：No 1A, Jalan Melaka Raya 2, Taman Melaka Raya, 75000, Melaka<br><br>
-						请在抵达会场的时候亮出您的QR code 报到。<br>
-						报到完毕后将会有小小惊喜送给您。 <br><br>
-						耀祥与仙明 合十<br>';
+		$mail->Subject = 'Email subject';
+		$mail->Body    = 'Email content';
 		$mail->CharSet="UTF-8";
 		$mail->send();
 	} catch (Exception $e) {
