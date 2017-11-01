@@ -6,3 +6,5 @@
 !/img/qrcode/
 /img/qrcode/*.png
 !/img/welcome.jpg
+/PHPMailer
+/phpqrcode
